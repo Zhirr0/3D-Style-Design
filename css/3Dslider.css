@@ -3,10 +3,10 @@
 
 /* Define fluid responsive values for slider only */
 :root {
-  /* Slider dimensions that scale with viewport */
-  --slider-width: clamp(100px, 15vw, 200px);
-  --slider-height: clamp(200px, 25vh, 250px);
-  --slider-translateZ: clamp(170px, 40vw, 550px);
+    /* Slider dimensions that scale with viewport */
+    --slider-width: clamp(100px, 15vw, 200px);
+    --slider-height: clamp(200px, 25vh, 250px);
+    --slider-translateZ: clamp(170px, 40vw, 550px);
 }
 
 * {
@@ -63,11 +63,11 @@ body::before {
 
 @keyframes autoRun {
     from {
-        transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+        transform: perspective(1000px) rotateX(-10deg) rotateY(0deg);
     }
 
     to {
-        transform: perspective(1000px) rotateX(-16deg)rotateY(360deg);
+        transform: perspective(1000px) rotateX(-10deg)rotateY(360deg);
     }
 }
 
@@ -75,9 +75,7 @@ body::before {
     position: absolute;
     inset: 0 0 0 0;
     transform:
-        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
-        translateY(clamp(-20px, -2vh, 0px)) 
-        translateZ(var(--slider-translateZ));
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(clamp(-20px, -2vh, 0px)) translateZ(var(--slider-translateZ));
 }
 
 .banner .slider .item img {
@@ -148,6 +146,8 @@ body::before {
         font-size: 13em;
     }
 
+
+
     .banner .content .model {
         height: 65vh;
         background-size: auto 115%;
@@ -163,60 +163,69 @@ body::before {
         height: 70vh;
         background-size: auto 100%;
     }
-}
 
-@media (max-width: 900px) {
-    .banner .content .model {
-        height: 80vh;
-        background-size: auto 80%;
-        transform: translateY(20%);
+    @keyframes autoRun {
+        from {
+            transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+        }
+
+        to {
+            transform: perspective(1000px) rotateX(-16deg)rotateY(360deg);
+        }
+    }
+
+    @media (max-width: 900px) {
+        .banner .content .model {
+            height: 80vh;
+            background-size: auto 80%;
+            transform: translateY(20%);
+
+        }
+
+        .banner .content h1 {
+            font-size: 6em;
+        }
+
+        .banner .content {
+            padding-bottom: 20px;
+        }
+
 
     }
 
-    .banner .content h1 {
-        font-size: 6em;
+    @media (max-width: 790px) {
+        .banner {
+            height: auto;
+            min-height: 100vh;
+        }
+
+        .banner .content {
+            flex-direction: column;
+            align-items: center;
+            width: 100vh;
+        }
+
+        .banner .content h1 {
+            text-align: center;
+        }
+
+        .banner .content .model {
+            height: 140vh;
+            background-size: auto 50%;
+            transform: translateY(50%);
+        }
     }
 
-    .banner .content {
-        padding-bottom: 20px;
+    @media (max-width: 650px) {
+        .banner .content .model {
+            height: 130vh;
+        }
     }
 
 
-}
 
-@media (max-width: 790px) {
-    .banner {
-        height: auto;
-        min-height: 100vh;
+    @media (max-width: 380px) {
+        .banner .content h1 {
+            font-size: 90px;
+        }
     }
-
-    .banner .content {
-        flex-direction: column;
-        align-items: center;
-        width: 100vh;
-    }
-
-    .banner .content h1 {
-        text-align: center;
-    }
-
-    .banner .content .model {
-        height: 140vh;
-        background-size: auto 50%;
-        transform: translateY(50%);
-    }
-}
-
-@media (max-width: 650px) {
-    .banner .content .model {
-        height: 130vh;
-    }
-}
-
-
-
-@media (max-width: 380px) {
-    .banner .content h1 {
-        font-size: 90px;
-    }
-}
