@@ -115,12 +115,6 @@ body::before {
     color: transparent;
 }
 
-.banner .content .author {
-    font-family: Poppins;
-    text-align: right;
-    max-width: 200px;
-}
-
 .banner .content h2 {
     font-size: 3em;
 }
@@ -175,10 +169,6 @@ body::before {
     .banner .content {
         padding-bottom: 20px;
     }
-
-    .banner .content .author {
-        text-align: center;
-    }
 }
 
 @media (max-width: 790px) {
@@ -196,12 +186,7 @@ body::before {
     .banner .content h1 {
         text-align: center;
     }
-
-    .banner .content .author {
-        text-align: center;
-        max-width: 100vw;
-    }
-
+  
     .banner .content .model {
         height: 100vh;
         background-size: auto 50%;
