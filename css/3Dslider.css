@@ -1,6 +1,43 @@
 @import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
 @import url('https://fonts.cdnfonts.com/css/poppins');
 
+/* Define fluid responsive values for slider only */
+:root {
+  /* Slider dimensions that scale with viewport */
+  --slider-width: clamp(100px, 15vw, 200px);
+  --slider-height: clamp(200px, 25vh, 250px);
+  --slider-translateZ: clamp(170px, 40vw, 550px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #D2D2D2;
+    background-image:
+        repeating-linear-gradient(to right, transparent 0 100px,
+            #25283b22 100px 101px),
+        repeating-linear-gradient(to bottom, transparent 0 100px,
+            #25283b22 100px 101px);
+}
+
+body::before {
+    position: absolute;
+    width: min(1400px, 90vw);
+    top: 10%;
+    left: 50%;
+    height: 90%;
+    transform: translateX(-50%);
+    content: '';
+    background-image: url(img/bg.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: top center;
+    pointer-events: none;
+}
 
 .banner {
     width: 100%;
@@ -10,14 +47,12 @@
     position: relative;
 }
 
-
-
 .banner .slider {
     position: absolute;
-    width: 200px;
-    height: 250px;
-    top: 10%;
-    left: calc(50% - 100px);
+    width: var(--slider-width);
+    height: var(--slider-height);
+    top: clamp(5%, 2vw + 8%, 10%);
+    left: calc(50% - var(--slider-width) / 2);
     transform-style: preserve-3d;
     transform: perspective(1000px);
     animation: autoRun 20s linear infinite;
@@ -27,7 +62,6 @@
 @keyframes autoRun {
     from {
         transform: perspective(1000px) rotateX(-10deg) rotateY(0deg);
-
     }
 
     to {
@@ -38,17 +72,16 @@
 .banner .slider .item {
     position: absolute;
     inset: 0 0 0 0;
-
     transform:
-        /* the 1deg doesn't change the value but it adds units since multiplying by one doesn't change anything its just the unit  */
-        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(550px);
+        rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) 
+        translateY(clamp(-20px, -2vh, 0px)) 
+        translateZ(var(--slider-translateZ));
 }
 
 .banner .slider .item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 }
 
 .banner .content {
@@ -63,7 +96,6 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .banner .content h1 {
@@ -83,13 +115,11 @@
     color: transparent;
 }
 
-
 .banner .content .author {
     font-family: Poppins;
     text-align: right;
     max-width: 200px;
 }
-
 
 .banner .content h2 {
     font-size: 3em;
@@ -110,16 +140,6 @@
 
 /* Responsive Design */
 @media (max-width: 1400px) {
-    .banner .slider {
-        width: 180px;
-        height: 225px;
-        left: calc(50% - 90px);
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(480px);
-    }
-
     .banner .content h1 {
         font-size: 13em;
     }
@@ -131,16 +151,6 @@
 }
 
 @media (max-width: 1200px) {
-    .banner .slider {
-        width: 160px;
-        height: 200px;
-        left: calc(50% - 80px);
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(400px);
-    }
-
     .banner .content h1 {
         font-size: 10em;
     }
@@ -152,32 +162,20 @@
 }
 
 @media (max-width: 900px) {
-    .banner .slider {
-        width: 150px;
-        height: 200px;
-        left: calc(50% - 75px);
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(350px);
-    }
-
     .banner .content .model {
         height: 80vh;
         background-size: auto 80%;
         transform: translateY(150px);
     }
+
     .banner .content h1 {
         font-size: 6em;
-
     }
-
 
     .banner .content {
         padding-bottom: 20px;
-
-
     }
+
     .banner .content .author {
         text-align: center;
     }
@@ -189,26 +187,13 @@
         min-height: 100vh;
     }
 
-    .banner .slider {
-        width: 140px;
-        height: 200px;
-        left: calc(50% - 70px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(300px);
-    }
-
     .banner .content {
-
         flex-direction: column;
         align-items: center;
         width: 100vh;
     }
 
     .banner .content h1 {
-
         text-align: center;
     }
 
@@ -224,108 +209,14 @@
     }
 }
 
-
-@media (max-width: 670px) {
-    .banner .slider {
-        width: 110px;
-        height: 200px;
-        left: calc(50% - 55px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(240px);
-    }
-
-}
-@media (max-width: 560px) {
-    .banner .slider {
-        width: 110px;
-        height: 200px;
-        left: calc(50% - 55px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(240px);
-    }
-}
-
-@media (max-width: 530px) {
-    .banner .slider {
-        width: 130px;
-        height: 200px;
-        left: calc(50% - 65px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(230px);
-    }
-}
-
-@media (max-width: 530px) {
-    .banner .slider {
-        width: 110px;
-        height: 200px;
-        left: calc(50% - 55px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(210px);
-    }
-}
-
 @media (max-width: 474px) {
     .banner .content .author {
         transform: translateY(50px);
     }
 }
 
-@media (max-width: 460px) {
-    .banner .slider {
-        width: 110px;
-        height: 200px;
-        left: calc(50% - 55px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(200px);
-    }
-}
-
-@media (max-width: 437px) {
-    .banner .slider {
-        width: 110px;
-        height: 200px;
-        left: calc(50% - 55px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(190px);
-    }
-}
-
-@media (max-width: 420px) {
-    .banner .slider {
-        width: 100px;
-        height: 200px;
-        left: calc(50% - 50px);
-        top: 5%;
-    }
-
-    .banner .slider .item {
-        transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateY(-20px) translateZ(170px);
-    }
-}
-
 @media (max-width: 380px) {
     .banner .content h1 {
-
         font-size: 90px;
-
     }
 }
